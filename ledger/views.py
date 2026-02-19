@@ -24,8 +24,8 @@ def recipe_detail(request, pk):
 
 class RecipeListView(ListView):
     model = Recipe
-    template_name = 'task_list.html'
+    template_name = 'recipe_list.html'
 
 class RecipeDetailView(DetailView):
     model = Recipe
-    template_name = 'task_detail.html'
+    template_name = 'recipe_detail.html'
