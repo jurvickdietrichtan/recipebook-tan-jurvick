@@ -22,10 +22,5 @@ def recipe_detail(request, pk):
     context = {"recipe": recipe}
     return render(request, "ledger/recipe_detail.html", context)
 
-class RecipeListView(ListView):
-    model = Recipe
-    template_name = 'recipe_list.html'
 
-class RecipeDetailView(DetailView):
-    model = Recipe
-    template_name = 'recipe_detail.html'
+
