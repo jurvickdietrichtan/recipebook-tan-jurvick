@@ -1,80 +1,31 @@
 from django.shortcuts import render
+from django.views.generic.base import TemplateView
 
 
-RECIPES = [
-    {
-    "name": "Recipe 1",
-    "ingredients": [
-        {
-            "name": "tomato",
-            "quantity": "3pcs"
-        },
-        {
-            "name": "onion",
-            "quantity": "1pc"
-        },
-        {
-            "name": "pork",
-            "quantity": "1kg"
-        },
-        {
-            "name": "water",
-            "quantity": "1L"
-        },
-        {
-            "name": "sinigang mix",
-            "quantity": "1 packet"
-        }
-    ],
-    "link": "/recipe/1"
-},
-    {
-    "name": "Recipe 2",
-    "ingredients": [
-        {
-            "name": "garlic",
-            "quantity": "1 head"
-        },
-        {
-            "name": "onion",
-            "quantity": "1pc"
-        },
-        {
-            "name": "vinegar",
-            "quantity": "1/2cup"
-        },
-        {
-            "name": "water",
-            "quantity": "1 cup"
-        },
-        {
-            "name": "salt",
-            "quantity": "1 tablespoon"
-        },
-        {
-            "name": "whole black peppers",
-            "quantity": "1 tablespoon"
-        },
-        {
-            "name": "pork",
-            "quantity": "1 kilo"
-        }
-    ],
-    "link": "/recipe/2"
-},
-]
+from django.http import HttpResponse
 
+from .models import Recipe
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
+
+def index(request):
+    return HttpResponse('Sorry bro.')
 
 def recipe_list(request):
-    context = {"recipes": RECIPES}
+    recipes = Recipe.objects.all()
+    context = {"recipes": recipes}
     return render(request, "ledger/recipe_list.html", context)
 
 
-def recipe_1(request):
-    context = RECIPES[0]
-    return render(request, "ledger/recipe_show.html", context)
+def recipe_detail(request, pk):
+    recipe = Recipe.objects.all(pk=pk)
+    context = {"recipe": recipe}
+    return render(request, "ledger/recipe_detail.html", context)
 
+class RecipeListView(ListView):
+    model = Recipe
+    template_name = 'task_list.html'
 
-def recipe_2(request):
-    context = RECIPES[1]
-    return render(request, "ledger/recipe_show.html", context)
+class RecipeDetailView(DetailView):
+    model = Recipe
+    template_name = 'task_detail.html'
