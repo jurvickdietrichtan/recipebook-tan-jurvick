@@ -10,10 +10,14 @@ from django.views.generic.list import ListView
 from django.contrib.auth.decorators import login_required
 
 @login_required
+
+def login(request):
+    return render(request, "login.html")
+
 def recipe_detail(request, pk):
     recipe = Recipe.objects.get(pk=pk)
     context = {"recipe": recipe}
-    return render(request, "ledger/recipe_show.html", context)
+    return render(request, "ledger/recipe_detail.html", context)
 
 def index(request):
     return HttpResponse('Sorry bro.')
