@@ -3,8 +3,10 @@ from django.views.generic.base import TemplateView
 
 
 from django.http import HttpResponse
-
+from django.views.generic import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Recipe
+
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.contrib.auth.decorators import login_required
@@ -26,6 +28,11 @@ def recipe_list(request):
     recipes = Recipe.objects.all()
     context = {"recipes": recipes}
     return render(request, "ledger/recipe_list.html", context)
+
+class RecipeCreateView(LoginRequiredMixin, CreateView):
+    model = Recipe
+    fields = ["name"]
+    template_name = "ledger/recipe_add.html"
 
 
 

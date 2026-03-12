@@ -26,4 +26,4 @@ urlpatterns = [
     path("password_reset/", auth_views.PasswordResetView.as_view(), name="password_reset"),
     path('admin/', admin.site.urls),
     path('', include('ledger.urls')),
-]
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

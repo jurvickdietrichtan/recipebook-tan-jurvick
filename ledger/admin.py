@@ -1,9 +1,12 @@
 from django.contrib import admin
-from .models import Recipe, Ingredient, RecipeIngredient, Profile
+from .models import Recipe, Ingredient, RecipeIngredient, Profile, RecipeImage
 
 
 class RecipeIngredientInline(admin.TabularInline):
     model = RecipeIngredient
+
+class RecipeImageInline(admin.TabularInline):
+    model = RecipeImage
 
 class ProfileAdmin(admin.ModelAdmin):
     model = Profile
@@ -14,8 +17,8 @@ class RecipeAdmin(admin.ModelAdmin):
     model = Recipe
     search_fields = ['name']
     list_display = ['name']
-    inlines = [RecipeIngredientInline]
-
+    inlines = [RecipeIngredientInline, RecipeImageInline]
+    
 class IngredientAdmin(admin.ModelAdmin):
     model = Ingredient
     search_fields = ['name']
@@ -24,3 +27,4 @@ class IngredientAdmin(admin.ModelAdmin):
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(Ingredient, IngredientAdmin)
+

@@ -7,6 +7,9 @@
 {% block content %}
 <p>Author: {{ recipe.author.name }}</p>
 <p><a href="{% url 'recipe_list' %}">Back to Recipe List</a></p>
+{% for image in recipe.images.all %}
+    <img src="{{ image.image.url }}" alt="{{ image.description }}">
+{% endfor %}
 
 <ul>
     {% for ingredient in recipe.ingredients.all %}
