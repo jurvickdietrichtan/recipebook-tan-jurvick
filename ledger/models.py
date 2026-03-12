@@ -3,18 +3,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
-class RecipeImage(models.Model):
-    recipe = models.ForeignKey(
-        Recipe,
-        on_delete=models.CASCADE,
-        related_name="images"
-    )
 
-    image = models.ImageField(upload_to="recipe_images/")
-    description = models.CharField(max_length=255)
-
-    def __str__(self):
-        return f"{self.recipe.name} image"
 
 class Profile(models.Model):
     user = models.OneToOneField(
@@ -74,3 +63,15 @@ class RecipeIngredient(models.Model):
     def __str__(self):
         return f"{self.quantity} of {self.ingredient.name} for {self.recipe.name}"
     
+class RecipeImage(models.Model):
+    recipe = models.ForeignKey(
+        Recipe,
+        on_delete=models.CASCADE,
+        related_name="images"
+    )
+
+    image = models.ImageField(upload_to="recipe_images/")
+    description = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.recipe.name} image"
