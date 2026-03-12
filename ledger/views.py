@@ -37,3 +37,4 @@ class RecipeCreateView(LoginRequiredMixin, CreateView):
 
 
 
+
