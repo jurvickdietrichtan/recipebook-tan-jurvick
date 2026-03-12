@@ -5,7 +5,7 @@ from django.views.generic.base import TemplateView
 from django.http import HttpResponse
 from django.views.generic import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Recipe
+from .models import Recipe, RecipeImage
 
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
@@ -33,6 +33,12 @@ class RecipeCreateView(LoginRequiredMixin, CreateView):
     model = Recipe
     fields = ["name"]
     template_name = "ledger/recipe_add.html"
+
+class RecipeImageCreateView(LoginRequiredMixin, CreateView):
+    model = RecipeImage
+    fields = ["image", "description"]
+    template_name = "ledger/add_image.html"
+
 
 
 
